@@ -3,6 +3,8 @@ on customers
 after update
 as
 begin
+    if trigger_nestlevel() > 1 
+        return
     insert into audit_logs (table_name, record_id, old_value, new_value)
     select 
         'customers',
@@ -19,6 +21,8 @@ on accounts
 after update
 as
 begin
+     if trigger_nestlevel() > 1 
+        return
     insert into audit_logs (table_name, record_id, old_value, new_value)
     select 
         'accounts',
